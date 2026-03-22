@@ -1,3 +1,4 @@
+import os
 import dash
 from dash import dcc, html
 import dash_bootstrap_components as dbc
@@ -22,6 +23,7 @@ app = dash.Dash(
     external_stylesheets=[dbc.themes.DARKLY],
     title="Olist Sales Dashboard"
 )
+server = app.server  # For deployment
 
 # ── Load all data once at startup ──────────────────────────────────
 print("Loading data from PostgreSQL...")
@@ -347,4 +349,5 @@ app.layout = dbc.Container([
 
 # ── Run ────────────────────────────────────────────────────────────
 if __name__ == '__main__':
-    app.run(debug=True, port=8050)
+    app.run(debug=False, host='0.0.0.0', 
+            port=int(os.environ.get('PORT', 8050)))

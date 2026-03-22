@@ -1,10 +1,16 @@
-from sqlalchemy import create_engine, text
+import os
 import pandas as pd
+from sqlalchemy import create_engine, text
 
-# ── Connection ─────────────────────────────────────────────────────
-DB_URL = "postgresql://postgres:kdsql@localhost:5432/olist_db"
+DB_URL = os.environ.get(
+    "DATABASE_URL",
+    "postgresql://postgres:kdsql@localhost:5432/olist_db"
+)
+
+if DB_URL.startswith("postgres://"):
+    DB_URL = DB_URL.replace("postgres://", "postgresql://", 1)
+
 engine = create_engine(DB_URL)
-
 def run_query(sql):
     with engine.connect() as conn:
         return pd.read_sql(text(sql), conn)
