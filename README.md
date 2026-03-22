@@ -15,4 +15,4 @@ powered by PostgreSQL and the Olist Brazilian E-Commerce dataset.
 - 6 related tables joined via SQL
 
 ## Live Dashboard
-*(link coming end of week)*
+🔗 https://sales-analytics-dashboard-fjj4.onrender.com
